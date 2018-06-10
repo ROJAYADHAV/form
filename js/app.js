@@ -9,8 +9,16 @@ function addDetails() {
             if(validateDesig()){
                 if(validateEmp()){
                     if(validateEmail()){
+                        if(validateMobile()){
+                            if(validateEmobile()){
             postData();
+                            }else{
+                                alert("invalid emergency num");
+                            }
+                    }else{
+                        alert("invalid number");
                     }
+                }
                     else{
                         alert("enter valid email address");
                     }
@@ -100,27 +108,57 @@ function validateDesig(){
  }
 
  function validateEmail(){
-      const email=$('#email').val();
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (!reg.test(email.value)) 
-        {
-            alert('Invalid Email Address');
-            return false;
-        }
-
+    const mail=$("#email").val();
+    var reg= /@virtusa.com\s*$/;
+    if(reg.test(mail))
+    {
         return true;
+    }
+    else{
+        return false;
+    }
 
 }
+
+
+function validateMobile(){
+    const mob=$("#mnum").val();
+var exp=/^(\+\d{1,3}[- ]?)?\d{10}$/;
+if(exp.test(mob))
+{
+    return true;
+}else{
+    return false;
+}
+}
+
+function validateEmobile(){
+    const mob1=$("#enum").val();
+    var exp1=/^(\+\d{1,3}[- ]?)?\d{10}$/;
+    if(exp1.test(mob1))
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 
 
 
 function postData() {
     const data = {
-        firstName: $('#firstName').val(),
-        fullName: $('#fullName').val(),
-        desig: $('desig').val()
+        firstName: $('#first').val(),
+        fullName: $('#fullname').val(),
+        desig: $('#desig').val(),
+        EmployeeCode:$('#empid').val(),
+        BloodGrp:$('#blood').val(),
+        ReasonsForIssue:$('#issue').val(),
+        DateofEmployment:$('#date').val(),
+        Email:$('#email').val(),
+        MobileNo:$('#mnum').val(),
+        EmergencyMobile:$('#enum').val()
     };
     $.ajax({
         type: "POST",
